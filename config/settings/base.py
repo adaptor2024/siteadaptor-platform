@@ -32,23 +32,23 @@ SHARED_APPS = [
     "django_celery_beat",
     "django_celery_results",
     "djstripe",
-    # SHARED apps платформы
-    "apps.aggregator",
-    "apps.global_categories",
+    # SHARED apps платформы (раскомментируются по мере прохождения спринтов)
+    # "apps.aggregator",       # Sprint 5
+    # "apps.global_categories",  # Sprint 5
 ]
 
 TENANT_APPS = [
     # Django built-ins (нужны и в tenant schema)
     "django.contrib.contenttypes",
     "django.contrib.auth",
-    # TENANT apps платформы
-    "apps.core",
-    "apps.catalog",
-    "apps.promotions",
-    "apps.subscriptions",
-    "apps.publishing",
-    "apps.notifications",
-    "apps.billing",
+    # TENANT apps платформы (раскомментируются по мере прохождения спринтов)
+    # "apps.core",          # Task 1.3
+    # "apps.catalog",
+    # "apps.promotions",
+    # "apps.subscriptions",
+    # "apps.publishing",
+    # "apps.notifications",
+    # "apps.billing",
 ]
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]

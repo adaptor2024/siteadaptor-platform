@@ -4,8 +4,10 @@ from .base import BASE_DIR, INSTALLED_APPS, MIDDLEWARE, STORAGES
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
-# Local development: subdomains через *.localhost
-TENANT_DOMAIN_BASE = "localhost:8000"
+# Базовый хост: на dev-сервере siteadaptor.de с wildcard A-записью.
+# Tenant routing django-tenants работает через Domain model, не через эту
+# переменную, — оставляем для генерации URL в шаблонах.
+TENANT_DOMAIN_BASE = "siteadaptor.de:8000"
 
 # Email на консоль в dev
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
