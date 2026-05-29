@@ -42,7 +42,7 @@ TENANT_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.auth",
     # TENANT apps платформы (раскомментируются по мере прохождения спринтов)
-    # "apps.core",          # Task 1.3
+    "apps.core",  # Task 1.3 — абстрактные миксины/утилиты, без своих таблиц
     # "apps.catalog",
     # "apps.promotions",
     # "apps.subscriptions",
