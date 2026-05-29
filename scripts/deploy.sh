@@ -24,7 +24,9 @@ PROFILE_ARGS=""
 if [ "$MODE" = "single" ]; then
 	PROFILE_ARGS="--profile single"
 fi
-COMPOSE="docker compose -f docker-compose.prod.yml $PROFILE_ARGS"
+# --env-file гарантирует, что ${...} в compose (напр. POSTGRES_PASSWORD:
+# ${DB_PASSWORD}) интерполируются из .env.prod, а не из дефолтного .env/shell.
+COMPOSE="docker compose --env-file .env.prod -f docker-compose.prod.yml $PROFILE_ARGS"
 
 cd "$REPO_DIR"
 
