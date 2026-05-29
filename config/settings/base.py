@@ -34,6 +34,7 @@ SHARED_APPS = [
     "django_celery_results",
     "djstripe",
     "widget_tweaks",  # template-теги для форм (без БД)
+    "apps.audit",  # журнал действий (SHARED), дополнение 1.1
     # SHARED apps платформы (раскомментируются по мере прохождения спринтов)
     # "apps.aggregator",       # Sprint 5
     # "apps.global_categories",  # Sprint 5
