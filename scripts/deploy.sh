@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
-# Деплой из git. Запускать НА сервере из корня репозитория:
+# Деплой из git. Запускать НА сервере (из любой папки — путь к репо
+# определяется автоматически по расположению скрипта):
 #   ./scripts/deploy.sh            # прод: Postgres на отдельном db-сервере
 #   ./scripts/deploy.sh single     # один сервер: Postgres в Docker здесь же
 #
 # Или одной командой с локальной машины:
-#   ssh hetzner-app 'cd /opt/siteadaptor-platform && ./scripts/deploy.sh single'
+#   ssh hetzner-app '~/projects/siteadaptor-platform/scripts/deploy.sh single'
 #
 # Идемпотентно: тянет main, пересобирает образы, прогоняет миграции по всем
 # схемам, собирает статику, перезапускает сервисы, проверяет health.
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-/opt/siteadaptor-platform}"
+# Корень репозитория = на уровень выше папки со скриптом (scripts/).
+# Можно переопределить через REPO_DIR=... ./scripts/deploy.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="${REPO_DIR:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 BRANCH="${DEPLOY_BRANCH:-main}"
 HEALTH_URL="${HEALTH_URL:-https://siteadaptor.de/health/ready/}"
 
