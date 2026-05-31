@@ -200,6 +200,19 @@ CELERY_TASK_DEFAULT_QUEUE = "default"
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_TIMEZONE = TIME_ZONE
 
+# Периодические задачи. DatabaseScheduler синхронизирует это в БД при старте
+# beat'а. Задачи сами проходят по всем схемам арендаторов (см. apps/*/tasks.py).
+CELERY_BEAT_SCHEDULE = {
+    "expire-reservations": {
+        "task": "apps.promotions.tasks.expire_reservations",
+        "schedule": 300.0,  # каждые 5 минут — просрочка броней + возврат остатка
+    },
+    "roll-promotion-statuses": {
+        "task": "apps.promotions.tasks.roll_promotion_statuses",
+        "schedule": 300.0,  # каждые 5 минут — scheduled→active, active→ended
+    },
+}
+
 # ---------------------------------------------------------------------------
 # Email (Resend через django-anymail)
 # ---------------------------------------------------------------------------
